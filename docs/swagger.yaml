@@ -1,0 +1,129 @@
+basePath: /
+definitions:
+  contacts.Contact:
+    properties:
+      email:
+        example: davinjayawork@gmail.com
+        type: string
+      name:
+        example: Davin Jaya Wisastra
+        type: string
+      phone:
+        example: "+60163906293"
+        type: string
+    type: object
+  contacts.ResponseWrapper:
+    properties:
+      response:
+        $ref: '#/definitions/contacts.Contact'
+      status:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: davinjayawork@gmail.com
+    name: Davin Jaya Wisastra
+  description: This is a sample service for managing contacts
+  termsOfService: http://swagger.io/terms/
+  title: Contacts API
+  version: "1.0"
+paths:
+  /contacts:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all contacts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: Object
+      summary: Get details of all contacts
+      tags:
+      - contacts
+    post:
+      consumes:
+      - application/json
+      description: Create a new contact with the input paylod
+      parameters:
+      - description: Name of the contact
+        in: body
+        name: contact
+        required: true
+        schema:
+          $ref: '#/definitions/contacts.Contact'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/contacts.ResponseWrapper'
+      summary: Create a new contact
+      tags:
+      - contacts
+  /contacts/{name}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a contact with the input paylod
+      parameters:
+      - description: Name of the contact
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/contacts.ResponseWrapper'
+      summary: Delete a contact
+      tags:
+      - contacts
+    get:
+      consumes:
+      - application/json
+      description: Get a details of a contact based on the contact name
+      parameters:
+      - description: Name of the contact
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/contacts.ResponseWrapper'
+      summary: Get a contact
+      tags:
+      - contacts
+    put:
+      consumes:
+      - application/json
+      description: Update the contact corresponding to the input contact name
+      parameters:
+      - description: Name of the contact
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/contacts.ResponseWrapper'
+      summary: Update contact identified by the given contact name
+      tags:
+      - contacts
+swagger: "2.0"

@@ -1,0 +1,194 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample service for managing contacts",
+        "title": "Contacts API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "Davin Jaya Wisastra",
+            "email": "davinjayawork@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/contacts": {
+            "get": {
+                "description": "Get details of all contacts",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "contacts"
+                ],
+                "summary": "Get details of all contacts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "Object"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new contact with the input paylod",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "contacts"
+                ],
+                "summary": "Create a new contact",
+                "parameters": [
+                    {
+                        "description": "Name of the contact",
+                        "name": "contact",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/contacts.Contact"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/contacts.ResponseWrapper"
+                        }
+                    }
+                }
+            }
+        },
+        "/contacts/{name}": {
+            "get": {
+                "description": "Get a details of a contact based on the contact name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "contacts"
+                ],
+                "summary": "Get a contact",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name of the contact",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/contacts.ResponseWrapper"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update the contact corresponding to the input contact name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "contacts"
+                ],
+                "summary": "Update contact identified by the given contact name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name of the contact",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/contacts.ResponseWrapper"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a contact with the input paylod",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "contacts"
+                ],
+                "summary": "Delete a contact",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name of the contact",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/contacts.ResponseWrapper"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "contacts.Contact": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "davinjayawork@gmail.com"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Davin Jaya Wisastra"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "+60163906293"
+                }
+            }
+        },
+        "contacts.ResponseWrapper": {
+            "type": "object",
+            "properties": {
+                "response": {
+                    "$ref": "#/definitions/contacts.Contact"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
